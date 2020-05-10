@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Using Rails version 2.5.7
 
-Things you may want to cover:
+To get started with this app on a local server, clone the repo then install the needed gems:
+```
+$ bundle install --without production
+```
 
-* Ruby version
+Next, migrate the database:
+```
+$ rails db:migrate
+```
 
-* System dependencies
+Finally, run the tst suite to verify everything is working:
+```
+$ rails test
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If the test suite passes, you are ready to run the app locally:
+```
+$ rails server
+```
