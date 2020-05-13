@@ -129,10 +129,12 @@ aside {
     }
   }
 }
+
 .gravatar {
   float: left;
   margin-right: 10px;
 }
+
 .gravatar_edit {
   margin-top: 15px;
 }
@@ -145,8 +147,24 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 18px;
   @include box_sizing;
 }
+
 input {
   height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
 }
 
 /* misc */
