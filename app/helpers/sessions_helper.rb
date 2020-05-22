@@ -10,7 +10,7 @@ module SessionsHelper
     user.remember
     #cookies.permanent.encrypted[:user_id] = user.id
     #cookies.permanent[:remember_token] = user.remember_token
-    expiration_date = 90.days.from_now.utc
+    expiration_date = 1.year.from_now.utc
     cookies.encrypted[:user_id] = { value: user.id,
                                     expires: expiration_date }
     cookies[:remember_token] = { value: user.remember_token,
@@ -30,6 +30,11 @@ module SessionsHelper
     end
   end
 
+  # returns true if given user is current user
+  def current_user?(user)
+    user && user == current_user
+  end
+
   # is user logged in
   def logged_in?
     !current_user.nil?
@@ -47,5 +52,16 @@ module SessionsHelper
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil
+  end
+
+  # redirect to stored location (or to default)
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  # stores URL accessed
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end
