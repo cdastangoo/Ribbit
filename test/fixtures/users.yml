@@ -7,3 +7,10 @@ altuser:
   name: altuser
   email: altuser@example.gov
   password_digest: <%= User.digest('password') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "user#{n+1}" %>
+  email: <%= "user#{n+1}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
