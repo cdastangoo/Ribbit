@@ -1,0 +1,13 @@
+Welcome to Ribbit!
+
+Your username is: <%= @user.name %>
+
+Click the link below to activate your account:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
+
+Please do not reply to this notification, this inbox is not monitored.
+
+If you are having a problem with your account, please email contact@ribbit.com
+
+Thanks for using the site!

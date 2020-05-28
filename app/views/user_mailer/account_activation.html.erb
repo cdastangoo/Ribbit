@@ -1,0 +1,10 @@
+<h1>Ribbit</h1>
+
+<p>Welcome to Ribbit!</p>
+<p>Your username is: <%= @user.name %></p>
+<p>Click the link below to activate your account:</p>
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
+<p>Please do not reply to this notifcation, this inbox is not monitored.</p>
+<p>If you are having a problem with your account, please email <%= mail_to "contact@ribbit.com" %></p>
+<p>Thanks for using this site!</p>
