@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   before_save { email.downcase! }
   before_create :create_activation_digest
   # username validation
@@ -46,13 +46,27 @@ class User < ApplicationRecord
   # activate account
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
-    # update_attribute(:activated, true)
-    # update_attribute(:activated_at, Time.zone.now)
   end
 
   # send activation email
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # set password reset attributes
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+  end
+
+  # send password reset email
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # returns true if password reset is expired
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
 
   private
