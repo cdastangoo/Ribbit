@@ -27,3 +27,11 @@ most_recent:
   content: "Some text for the content of a test post."
   created_at: <%= Time.zone.now %>
   user: testuser
+
+<% 30.times do |n| %>
+post_<%= n+1 %>:
+  title: <%= Faker::Lorem.sentence(word_count:3) %>
+  content: <%= Faker::Lorem.sentence(word_count:5) %>
+  created_at: <%= 42.days.ago %>
+  user: testuser
+<% end %>
