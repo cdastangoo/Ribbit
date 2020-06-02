@@ -1,0 +1,29 @@
+diode:
+  title: "Diode"
+  content: "diode.."
+  created_at: <%= 10.minutes.ago %>
+  user: testuser
+
+memes:
+  title: "Memes"
+  content: "your on you're own\nah i've\nheck no\nnot so fast"
+  created_at: <%= 2.years.ago %>
+  user: testuser
+
+cat_video:
+  title: "lol catz"
+  content: "Lmaoo watch this funny cat video: https://youtu.be/PKffm2uI4dk\n#catsofribbit"
+  created_at: <%= 3.hours.ago %>
+  user: testuser
+
+gibberish:
+  title: "Gibberish"
+  content: "do u stlil ahv eot vot eman? sne di tin othe!"
+  created_at: <%= 5.days.ago %>
+  user: testuser
+
+most_recent:
+  title: "Test Post"
+  content: "Some text for the content of a test post."
+  created_at: <%= Time.zone.now %>
+  user: testuser
