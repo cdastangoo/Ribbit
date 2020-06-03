@@ -15,6 +15,11 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
+  # returns username attribute to construct URL path
+  # def to_param
+  #   "#{self.name}"
+  # end
+
   # returns a hash digest
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
