@@ -24,37 +24,61 @@ end
 # generate posts for a subset of users
 users = User.order(:created_at).take(6)
 64.times do |n|
-  case n % 6
-  when 1
+  idx = n % 8
+  # generate title
+  case idx
+  when 1,4
     title = Faker::Commerce.product_name
-  when 2
+  when 2,5
     title = Faker::Company.catch_phrase
   when 3
     title = Faker::Book.title
-  when 4
+  when 6
     title = Faker::Music.album
   else
     title = Faker::Hipster.sentence(word_count: 3, supplemental: false, random_words_to_add: 2)
-    title = title.tr('.', %W(#{''} . ? !)[rand(4)])
+    title = title.tr('&\'', '').tr('.', %W(#{''} . ? ! ?! !?)[rand(6)])
+    title = title.tr('-', '') if rand(2) == 1
   end
-  case n % 16
-  when 1..6
-    content = Faker::Hipster.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4)
-  when 7..10
-    content = Faker::Hipster.sentence(word_count: 5, supplemental: false, random_words_to_add: 4)
-  when 11
-    content = Faker::Hacker.say_something_smart
-  when 12..14
-    content = Faker::TvShows::BojackHorseman.quote + "\n"
-    content += Faker::TvShows::Seinfeld.quote + "\n"
-    content += Faker::TvShows::HowIMetYourMother.quote + "\n"
-    content += Faker::TvShows::MichaelScott.quote + "\n"
-    content += Faker::TvShows::Simpsons.quote + "\n"
-    content += Faker::TvShows::RickAndMorty.quote
+  title.downcase! if rand(4) == 1
+  title = punctuate(title) if idx.between?(2, 4) && rand(4) == 1
+  # generate content
+  case idx
+  when 1
+    content = punctuate(Faker::TvShows::BojackHorseman.quote) + "\n"
+    content += punctuate(Faker::TvShows::FamilyGuy.quote) + "\n"
+    content += punctuate(Faker::TvShows::SouthPark.quote) + "\n"
+    content += punctuate(Faker::TvShows::RickAndMorty.quote)
+  when 2
+    content = Faker::ChuckNorris.fact
+    content += Faker::Hacker.say_something_smart
+  when 3
+    content = punctuate(Faker::Movies::HarryPotter.quote) + "\n"
+    content += punctuate(Faker::TvShows::GameOfThrones.quote) + "\n"
+    content += punctuate(Faker::Movies::LordOfTheRings.quote) + "\n"
+    content += punctuate(Faker::Movies::Hobbit.quote)
+  when 4
+    content = Faker::GreekPhilosophers.quote
+  when 5
+    content += punctuate(Faker::Movies::Ghostbusters.quote) + "\n"
+    content += punctuate(Faker::Movies::BackToTheFuture.quote) + "\n"
+    content += punctuate(Faker::Movies::Lebowski.quote)
+  when 6
+    content = punctuate(Faker::Quote.yoda) + "\n"
+    content += punctuate(Faker::Movies::StarWars.quote)
+  when 7
+    content = punctuate(Faker::TvShows::Friends.quote) + "\n"
+    content += punctuate(Faker::TvShows::HowIMetYourMother.quote) + "\n"
+    content += punctuate(Faker::TvShows::Community.quotes)
   else
-    content = Faker::ChuckNorris.fact + "\n"
-    content += Faker::GreekPhilosophers.quote + "\n"
-    content += Faker::Quote.yoda
+    content += Faker::TvShows::MichaelScott.quote
   end
   users.each { |user| user.posts.create!(title: title, content: content) }
+end
+
+# add punctuation or replace if ending in period
+def punctuate(str)
+  return str if %w(! ?).include? str[-1]
+  str = str[0..-2] if str[-1] == '.'
+  str + %w(. ! . ? . ?! . !?)[rand(8)]
 end

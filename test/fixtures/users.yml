@@ -12,6 +12,13 @@ altuser:
   activated: true
   activated_at: <%= Time.zone.now %>
 
+noposts:
+  name: noposts
+  email: noposts@example.net
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
 <% 30.times do |n| %>
 user_<%= n+1 %>:
   name: <%= "user#{n+1}" %>

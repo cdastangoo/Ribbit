@@ -75,6 +75,11 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  # defines a proto-feed
+  def feed
+    Post.where("user_id = ?", id)
+  end
+
   private
 
     # create and assign activation token and digest

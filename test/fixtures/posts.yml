@@ -5,8 +5,8 @@ diode:
   user: testuser
 
 memes:
-  title: "Memes"
-  content: "your on you're own\nah i've\nheck no\nnot so fast"
+  title: "Dumb memes"
+  content: "your on you're own; ah i've; heck no; not so fast!"
   created_at: <%= 2.years.ago %>
   user: testuser
 
@@ -19,8 +19,14 @@ cat_video:
 gibberish:
   title: "Gibberish"
   content: "do u stlil ahv eot vot eman? sne di tin othe!"
-  created_at: <%= 5.days.ago %>
-  user: testuser
+  created_at: <%= 7.days.ago %>
+  user: altuser
+
+tone:
+  title: "Watch your tone, buddy..."
+  content: "I'm sorry. Your words made sense, but your sarcastic tone did not."
+  created_at: <%= 5.months.ago %>
+  user: altuser
 
 most_recent:
   title: "Test Post"
@@ -28,9 +34,9 @@ most_recent:
   created_at: <%= Time.zone.now %>
   user: testuser
 
-<% 30.times do |n| %>
+<% 32.times do |n| %>
 post_<%= n+1 %>:
-  title: <%= Faker::Lorem.sentence(word_count:3) %>
+  title: <%= Faker::Lorem.sentence(word_count:3).tr('.', '') %>
   content: <%= Faker::Lorem.sentence(word_count:5) %>
   created_at: <%= 42.days.ago %>
   user: testuser
