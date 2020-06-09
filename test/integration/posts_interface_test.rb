@@ -10,6 +10,7 @@ class PostsInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get root_path
     assert_select 'div.pagination'
+    assert_select 'input[type=file]'
     # invalid title and content
     assert_no_difference 'Post.count' do
       post posts_path, params: { post: { title: "", content: "" } }
@@ -30,10 +31,12 @@ class PostsInterfaceTest < ActionDispatch::IntegrationTest
     end
     assert_select 'div#error_explanation'
     assert_select 'a[href=?]', '/?page=2'
-    # valid submission
+    # valid submission with image
+    image = fixture_file_upload('test/fixtures/frog.jpg', 'image/jpeg')
     assert_difference 'Post.count', 1 do
-      post posts_path, params: { post: { title: title, content: content } }
+      post posts_path, params: { post: { title: title, content: content, image: image } }
     end
+    assert assigns(:post).image.attached?
     assert_redirected_to root_url
     follow_redirect!
     assert_match title, response.body

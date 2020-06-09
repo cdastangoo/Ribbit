@@ -5,6 +5,12 @@ ruby '2.5.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+# Use for image resizing
+gem 'image_processing', '1.9.3'
+# Use for ImageMagick
+gem 'mini_magick', '4.9.5'
+# Use Active Storage for images
+gem 'active_storage_validations', '0.8.2'
 # Use BCrypt for password hashing
 gem 'bcrypt', '3.1.13'
 # Use Faker for generating sample users
@@ -26,11 +32,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -66,6 +67,8 @@ end
 group :production do
   # Use postgresql as the database for deployed record
   gem 'pg', '1.1.4'
+  # Use AWS for image storage
+  #gem 'aws-sdk-s3', '1.46.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
