@@ -4,6 +4,10 @@
 /* mixins, variables */
 
 $gray-medium-light: #eaeaea;
+$blue: #0d6efd;
+$blue-hover: #0c63e6;
+$blue-dark: #0a58cd;
+$blue-light: #65a2fd;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -15,6 +19,8 @@ $gray-medium-light: #eaeaea;
 
 body {
   padding-top: 60px;
+  font-family: 'Abel', sans-serif;
+  overflow-x: hidden;
 }
 
 section {
@@ -43,6 +49,7 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  padding-top: 20px;
 }
 
 h2 {
@@ -54,12 +61,28 @@ h2 {
   color: $gray-light;
 }
 
+h3 {
+  padding-top: 20px;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
 
 /* header */
+
+.navbar {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.navbar-nav > li > a {
+  transition: all 0.3s;
+}
+
+.dropdown-menu > li > a {
+  transition: all 0.2s;
+}
 
 #logo {
   float: left;
@@ -102,7 +125,7 @@ footer {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   footer {
     small {
       display: block;
@@ -120,9 +143,66 @@ footer {
   }
 }
 
+/* logged out page */
+
+.jumbotron {
+  background-image: url("https://wi.wallpapertip.com/wsimgs/12-129411_cyber-web.jpg");
+  background-size: cover;
+  margin-top: -10px;
+  margin-left: calc(-1 * (100vw - 100%) / 2 + 0.4vw);
+  margin-right: calc(-1 * (100vw - 100%) / 2 + 0.4vw);
+  border-radius: 0 !important;
+  height: 100vh;
+  animation: fadeIn 0.3s;
+}
+
+@media (max-width: 768px) {
+  .jumbotron {
+    //background-image: url("https://www.kolpaper.com/wp-content/uploads/2020/10/Cyber-Blue-Wallpaper.jpg");
+    margin-left: calc(-1 * (100vw - 100%) / 2);
+    margin-right: calc(-1 * (100vw - 100%) / 2);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://www.kolpaper.com/wp-content/uploads/2020/10/Cyber-Blue-Wallpaper.jpg");
+    background-size: cover;
+  }
+}
+
+.welcome-text {
+  color: #eee !important;
+  margin-top: calc(100vh / 4);
+  font-size: 3.5em !important;
+}
+.subwelcome-text {
+  color: $gray-medium-light !important;
+  letter-spacing: -1px;
+  font-size: 1.8em !important;
+  margin-top: 5vh;
+  margin-bottom: 5vh !important;
+}
+
+/* buttons */
+
+.btn-home {
+  border-width: 2px;
+}
+
+.btn-primary {
+  background-color: $blue;
+  border-color: $blue-hover;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background-color: $blue-hover;
+  border-color: $blue-dark;
+}
+.btn-primary:active, .btn-primary:focus, .btn-primary:checked {
+  background-color: $blue-dark !important;
+}
+
 /* sidebar */
 
 aside {
+  padding-top: 20px;
+
   section.user_info {
     margin-top: 20px;
   }
@@ -143,18 +223,36 @@ aside {
       text-align: left;
       letter-spacing: -1px;
       margin-bottom: 3px;
-      margin-top: 0px;
+      margin-top: 0;
+      padding-top: 0;
     }
   }
 }
 
+/* gravatar */
+
 .gravatar {
   float: left;
   margin-right: 10px;
+  border-radius: 6px;
+  transition: all 0.3s;
+  animation: fadeIn 0.5s;
+}
+.gravatar:hover {
+  opacity: 0.8;
 }
 
 .gravatar_edit {
   margin-top: 15px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* forms */
@@ -216,9 +314,18 @@ input {
 .posts {
   list-style: none;
   padding: 0;
+  animation: fadeIn 0.5s;
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    padding: 10px;
+    //border-top: 1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+  }
+  li:hover {
+    border: 1px solid $blue-light;
   }
   .user {
     margin-top: 5em;
@@ -228,10 +335,12 @@ input {
     display: block;
     margin-left: 30px;
     font-weight: bold;
+    padding-top: 3px;
   }
   .content {
     display: block;
     margin-left: 60px;
+    padding-top: 5px;
     img {
       display: block;
       padding: 5px 0;
@@ -241,11 +350,21 @@ input {
     color: $gray-light;
     display: block;
     margin-left: 60px;
+    padding-top: 5px;
   }
   .gravatar {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .posts {
+    .content {
+      img {
+        max-width: 70vw;
+      }
+    }
   }
 }
 
@@ -263,7 +382,7 @@ span.image {
   }
 }
 
-/* misc */
+/* debug */
 
 .debug_dump {
   clear: both;

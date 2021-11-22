@@ -13,6 +13,9 @@ class StaticPagesController < ApplicationController
   def about
   end
 
-  def contact
+  def privacy
+  end
+
+  def terms
   end
 end
