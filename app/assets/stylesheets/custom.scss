@@ -65,6 +65,13 @@ h3 {
   padding-top: 20px;
 }
 
+a {
+  transition: all 0.3s;
+}
+a:hover, a:active, a:checked, a:focus {
+  text-decoration: none !important;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -300,12 +307,30 @@ input {
 /* users index */
 
 .users {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 3em;
   list-style: none;
-  margin: 0;
+  max-width: 1280px;
+  margin-left: -40px;
   li {
     overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    padding: 10px;
+    //border-bottom: 1px solid $gray-lighter;
+    border: 1.5px solid $gray-medium-light;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+  li:hover {
+    border: 1.5px solid $blue-light;
+  }
+}
+
+@media (max-width: 768px) {
+  .users {
+    grid-gap: 2em;
   }
 }
 
@@ -317,15 +342,16 @@ input {
   animation: fadeIn 0.5s;
   li {
     padding: 10px;
-    //border-top: 1px solid #e8e8e8;
-    border: 1px solid #e8e8e8;
+    background-color: #f8f8f8;
+    border: 1.5px solid #e8e8e8;
     border-radius: 6px;
     margin-top: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
   }
   li:hover {
-    border: 1px solid $blue-light;
+    border: 1.5px solid $blue-light;
   }
   .user {
     margin-top: 5em;
@@ -343,7 +369,15 @@ input {
     padding-top: 5px;
     img {
       display: block;
-      padding: 5px 0;
+      margin: 5px 0;
+      border: 1.5px solid $gray-medium-light;
+      border-radius: 6px;
+      transition: all 0.3s;
+      animation: fadeIn 0.5s;
+    }
+    img:hover {
+      //border: 1.5px solid $blue-dark;
+      opacity: 0.85;
     }
   }
   .timestamp {
@@ -356,6 +390,7 @@ input {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
+    border: 1px solid $gray-medium-light;
   }
 }
 @media (max-width: 768px) {
