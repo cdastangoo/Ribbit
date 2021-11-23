@@ -1,3 +1,10 @@
+# add punctuation or replace if ending in period
+def punctuate(str)
+  return str if %w(! ?).include? str[-1]
+  str = str[0..-2] if str[-1] == '.'
+  str + %w(. ! . ? . ?! . !?)[rand(8)]
+end
+
 # create main sample user
 User.create!(name: "AdminUser",
              email: "example@email.com",
@@ -40,7 +47,7 @@ users = User.order(:created_at).take(6)
     title = title.tr('&\'', '').tr('.', %W(#{''} . ? ! ?! !?)[rand(6)])
     title = title.tr('-', '') if rand(2) == 1
   end
-  title.downcase! if rand(4) == 1
+  title = title.downcase if rand(4) == 1
   title = punctuate(title) if idx.between?(2, 4) && rand(4) == 1
   # generate content
   case idx
@@ -60,7 +67,7 @@ users = User.order(:created_at).take(6)
   when 4
     content = Faker::GreekPhilosophers.quote
   when 5
-    content += punctuate(Faker::Movies::Ghostbusters.quote) + "\n"
+    content = punctuate(Faker::Movies::Ghostbusters.quote) + "\n"
     content += punctuate(Faker::Movies::BackToTheFuture.quote) + "\n"
     content += punctuate(Faker::Movies::Lebowski.quote)
   when 6
@@ -71,14 +78,15 @@ users = User.order(:created_at).take(6)
     content += punctuate(Faker::TvShows::HowIMetYourMother.quote) + "\n"
     content += punctuate(Faker::TvShows::Community.quotes)
   else
-    content += Faker::TvShows::MichaelScott.quote
+    content = Faker::TvShows::MichaelScott.quote
   end
   users.each { |user| user.posts.create!(title: title, content: content) }
 end
 
-# add punctuation or replace if ending in period
-def punctuate(str)
-  return str if %w(! ?).include? str[-1]
-  str = str[0..-2] if str[-1] == '.'
-  str + %w(. ! . ? . ?! . !?)[rand(8)]
-end
+# create follower relationships
+users = User.all
+user = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
