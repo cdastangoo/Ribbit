@@ -205,6 +205,13 @@ footer {
   background-color: $blue-dark !important;
 }
 
+.btn-follow {
+  margin-top: 40px;
+}
+@media (max-width: 768px) {
+  margin-top: 0;
+}
+
 /* sidebar */
 
 aside {
