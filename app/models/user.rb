@@ -83,7 +83,7 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-  # defines a proto-feed
+  # show user feed
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
