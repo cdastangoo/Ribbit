@@ -63,9 +63,9 @@ end
 
 # create admin user
 User.create!(name: "AdminUser",
-             email: "example@email.com",
-             password: "blue420sky69",
-             password_confirmation: "blue420sky69",
+             email: "ribbitappuser@gmail.com",
+             password: "ribbit42app808",
+             password_confirmation: "ribbit42app808",
              activated: true,
              activated_at: Time.zone.now)
 
